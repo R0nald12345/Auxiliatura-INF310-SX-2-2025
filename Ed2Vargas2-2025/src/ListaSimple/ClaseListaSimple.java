@@ -5,7 +5,7 @@
  */
 package ListaSimple;
 
-/**
+/*
  *
  * @author Ronald C.
  */
@@ -32,10 +32,9 @@ public class ClaseListaSimple {
             this.prim = nuevoNodo;
         }
         cantidadNodos++; 
-        
     }
     
-
+    
     //Insertar en posicion i el dato x
     
     //Verificar Lista Vacia

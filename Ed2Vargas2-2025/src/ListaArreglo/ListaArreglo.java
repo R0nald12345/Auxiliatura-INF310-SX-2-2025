@@ -30,46 +30,16 @@ public class ListaArreglo {
         return this.cant;
     }
 
-    public void insertarFinal(int pos, int dato) {
+    public void insertarFinal(int dato) {
         
-        this.vector[pos] = dato;
+        this.vector[cant] = dato;
         this.cant++;
 
     }
 
-    //Procedimiento
-    public void ejercicio7(ListaArreglo L2, ListaArreglo L3) {
-        boolean bandera = true;
-        int contadorL2 = 0;
-        int contadorL3 = 0;
-        while (contadorL2 < L2.cantidadDeDatos() && contadorL3 < L3.cantidadDeDatos()) {
-            if (bandera == true) {
-                //Saca de L2
-                insertarFinal(cant, L2.obtenerDato(contadorL2));
-                contadorL2++;
-            } else {
-                //Saca de L3
-                insertarFinal(cant, L3.obtenerDato(contadorL3));
-                contadorL3++;
-            }
-            bandera = !bandera;
-        }
-
-        //L2 es vacio
-        while (contadorL3 < L3.cantidadDeDatos()) {
-            insertarFinal(cant, L3.obtenerDato(contadorL3));
-            contadorL3++;
-        }
-
-        //L3 es vacio
-        while (contadorL2 < L2.cantidadDeDatos()) {
-            insertarFinal(cant, L2.obtenerDato(contadorL2));
-            contadorL2++;
-        }
-
-    }
+  
     
-    //5
+    // AYUDANTIA 28/08/2025-----------------
     public int contarParIterativo(){
         int totalPar = 0;
         for (int i = 0; i < this.cant; i++) {
@@ -81,34 +51,86 @@ public class ListaArreglo {
     }
     
     
-    //Recursivo
     
-    public int contarPares(){
-        return contarParesRecursivo(this.cant);
+    public int contarPares1(){
+        return contarParesRecursivo1(this.cant);
     }
     
-    
-    //5
-    private int contarParesRecursivo(int cantAux ){
-        
-        // |8|
-        if(cantAux ==1 ){ //Caso Base
-            if(this.vector[cantAux-1] %2 == 0 ){
+    private int contarParesRecursivo1(int cantAux){
+        //Caso Base 2
+        if(cantAux == 1){
+            if(this.vector[cantAux-1]%2 == 0){
                 return 1;
             }else{
                 return 0;
             }
-            // |8|7|5|    4|    cant = 3
-        }else{ //Caso general
-            cantAux = cantAux -1; // 3
-            int totalPar = contarParesRecursivo(cantAux); // 3,, 2
-            if(this.vector[cantAux-1] % 2 == 0){
-                return totalPar+1;
-            }else{
-                return totalPar;
-            }
         }
+        //Caso General
+        cantAux = cantAux - 1;
+        int total = contarParesRecursivo1(cantAux); //4
+        
+        if(this.vector[cantAux-1] % 2 == 0){
+            return total + 1;
+        }else{
+            return total;
+        }
+        
     }
+    
+    public void invertir1(){
+        invertirRecursivo1(0,this.cant-1);
+    }
+    
+    private void invertirRecursivo1(int inicio, int fin){
+        if(inicio>=fin){
+            return;
+        }
+        int aux = this.vector[inicio];
+        this.vector[inicio] = this.vector[fin];
+        this.vector[fin] = aux;
+        invertirRecursivo1(inicio+1,fin-1);
+    }
+    
+            
+    public boolean verificarTodosIguales1(){
+        return verificarTodosIguales1(this.cant);
+    }
+    
+    private boolean verificarTodosIguales1(int cantAux){
+       //CB1
+       //Esta vacio mi Vector
+       if(cantAux == 0){
+           return false;
+       }
+       //CB2
+       //Tengo 1 Dato en mi vector
+       if(cantAux == 1){
+           return true;
+       }
+       cantAux = cantAux - 1;
+       boolean res = verificarTodosIguales1(cantAux);
+       if(!res){
+           return res;
+       }else{
+           if( this.vector[cantAux-1] == this.vector[cantAux] ){
+               return true;
+           }else{
+               return false;
+           }
+       }
+       
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    //Recursivo
+    
+    
     
     
     public int contarImpares(){
@@ -185,9 +207,7 @@ public class ListaArreglo {
         }
     }
     
-    
-    
-    
+  
 
     public String toString() { //Muestra los datos de mi arrgelo
         String cadena = "[ ";
@@ -198,3 +218,7 @@ public class ListaArreglo {
     }
 
 }
+
+
+
+ 
